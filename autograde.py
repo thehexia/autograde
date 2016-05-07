@@ -36,7 +36,9 @@ input_text = ""
 if len(sys.argv) > 2:
     input_file = os.path.abspath(sys.argv[2])
     has_input = True
-    input_text = open(input_file, "r").read()
+    f = open(input_file, "r")
+    input_text = f.read()
+    f.close()
 
 if has_input:
     print(input_text)
@@ -61,7 +63,7 @@ for filename in os.listdir(folder):
         f.flush();
         ok = True
         try:
-            check_output(["g++-4.9", file_path, "-o", compile_path], stderr=f)
+            check_output(["g++-4.9", "-std=c++11", file_path, "-o", compile_path], stderr=f)
         except CalledProcessError:
             ok = False
 
